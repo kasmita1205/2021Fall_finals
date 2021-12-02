@@ -33,3 +33,34 @@ def process_dataframe(frame: pd.DataFrame) -> pd.DataFrame:
     frame['date']=frame['Date'].dt.strftime('%m-%Y')
     frame.reset_index(inplace =True,drop=True)
     return frame
+
+def compare_monthly_energy_with_covid(frame: pd.DataFrame, covid_df :pd.DataFrame) -> object:
+    """
+
+    :param frame: Dataframe with monthly energy data
+    :param covid_df: Dataframe with monthly covid data
+    :return: plot
+    """
+    frame = frame.iloc[1:]
+    frame.rename(columns = {'Month':"Date"}, inplace =True)
+    frame['Date'] = pd.to_datetime(frame['Date'])
+    y=[2017,2018,2019,2020,2021]
+    frame = process_dataframe(frame, y)
+    frame =frame[['Date', 'Total Fossil Fuels Consumption','Total Renewable Energy Consumption','Total Primary Energy Consumption', 'year','month']]
+    frame =pd.merge(frame, covid_df, on=['year','month'], how='left')
+    frame.drop(columns= {'year','month','Cumulative_cases'}, inplace =True)
+    fig, ax = plt.subplots(figsize = (15,6))
+    ax.plot(frame['New_cases'], label='no of cases', color ='r')
+    ax.legend(loc=1)
+    plt.xticks(np.arange(0,56,1), frame['Date'].dt.strftime('%m-%Y'), rotation=60)
+    plt.ylabel("Covid Cases (in Million)")
+    plt.xlabel("Timeline")
+    ax2 = ax.twinx()
+    ax2.plot(frame['Total Primary Energy Consumption'], label="energy consumption")
+    ax2.legend(loc=2)
+    plt.ylabel("Energy Consumption(in Quadrillion Btu)")
+    plt.title("Energy Consumption in US during pandemic")
+    x=[12,24,36,48]
+    for i in x:
+        plt.axvline(x=i, c='y')
+    plt.show()
