@@ -20,21 +20,22 @@ def get_country_data(frame: pd.DataFrame, country_code: str) -> pd.DataFrame:
     return df
 
 #function to process dataframe
-def process_dataframe(frame: pd.DataFrame) -> pd.DataFrame:
+def process_dataframe(frame: pd.DataFrame, year) -> pd.DataFrame:
     """
     Function to preprocess dataframe for datetime and filter data for year 2020-2021.
     :param frame: original dataframe
+    :param year: list of year
     :return: frame with data for year 2020-21.
     """
     frame['Date'] = pd.to_datetime(frame['Date'])
     frame['month'] = frame['Date'].dt.month
     frame['year'] = frame['Date'].dt.year
-    frame = frame[frame['year'].isin([2020, 2021])]
+    frame = frame[frame['year'].isin(year)]
     frame['date']=frame['Date'].dt.strftime('%m-%Y')
     frame.reset_index(inplace =True,drop=True)
     return frame
 
-def compare_monthly_energy_with_covid(frame: pd.DataFrame, covid_df :pd.DataFrame) -> object:
+def compare_monthly_energy_with_covid(frame: pd.DataFrame, covid_df :pd.DataFrame):
     """
 
     :param frame: Dataframe with monthly energy data
