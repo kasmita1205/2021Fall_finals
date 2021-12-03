@@ -68,6 +68,58 @@ def compare_monthly_energy_with_covid(frame: pd.DataFrame, covid_df :pd.DataFram
     plt.show()
 
 
+def process_electricity_consumption(total_electricity_consump: pd.DataFrame):
+    total_electricity_consump.reset_index(inplace=True, drop=True)
+    total_electricity_consump.drop("API", axis=1, inplace=True)
+    total_electricity_consump.rename(columns={"Unnamed: 1": "Geography"}, inplace=True)
+    total_electricity_consump = total_electricity_consump.iloc[1:, :]
+    total_electricity_consump = total_electricity_consump.set_index("Geography")
+    total_electricity_consump = pd.DataFrame.transpose(total_electricity_consump)
+    total_electricity_consump.reset_index(inplace=True)
+    total_electricity_consump.rename(columns={"index": "Year", "Geography": "index"}, inplace=True)
+    for x in total_electricity_consump.columns:
+        total_electricity_consump.rename(columns={x: x.lstrip()}, inplace=True)
+    total_electricity_consump = total_electricity_consump[['Year', 'World', 'United States']]
+    return total_electricity_consump
+
+
+def per_person_electricity_consumption(population: pd.DataFrame, total_electricity_consump: pd.DataFrame):
+    population = population.iloc[1:, 1:]
+    population.rename(columns={'Unnamed: 1': "Geography"}, inplace=True)
+    population = population.set_index("Geography")
+    population = pd.DataFrame.transpose(population)
+    population.reset_index(inplace=True)
+    population.rename(columns={"index": "Year", "Geography": "index"}, inplace=True)
+    for x in population.columns:
+        population.rename(columns={x: x.lstrip()}, inplace=True)
+    population_world = population[['Year', 'World', 'United States']]
+    population_world = pd.merge(population_world, total_electricity_consump, on='Year', how='inner')
+    population_world.rename(columns={"World_x": "World Population", "United States_x": "US Population",
+                                     'World_y': "World Electricity Consumption",
+                                     "United States_y": "US Electricity Consumption"}, inplace=True)
+    population_world = population_world[
+        ["Year", "World Population", "US Population", "World Electricity Consumption", "US Electricity Consumption"]]
+    population_world["Perperson Electricity Consumption World"] = (population_world[
+                                                                       'World Electricity Consumption'].astype(float) /
+                                                                   population_world["World Population"].astype(
+                                                                       float)) * 1000
+    population_world["Perperson Electricity Consumption US"] = (population_world['US Electricity Consumption'].astype(
+        float) / population_world["US Population"].astype(float)) * 1000
+    plt.figure(figsize=[20, 10])
+    plt.subplot(2, 2, 1)
+    plt.plot(population_world['Year'], population_world['Perperson Electricity Consumption World'])
+    plt.xlabel("Year")
+    plt.ylabel("Consumption(in Million kWh)")
+    plt.title("Perperson Energy Consumption in World")
+    plt.xticks(rotation=90)
+
+    plt.subplot(2, 2, 3)
+    plt.plot(population_world['Year'], population_world['Perperson Electricity Consumption US'], color='r')
+    plt.xlabel("Year")
+    plt.ylabel("Consumption(in Million kWh)")
+    plt.title("Perperson Energy Consumption in US")
+    plt.xticks(rotation=90)
+    plt.show()
 
 
 # ------------------------------------------------------------------------------------
