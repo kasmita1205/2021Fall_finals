@@ -9,7 +9,7 @@
 ### Hypothesis:
 1.	There is no change in energy consumption in US during pandemic
 2.	There is no significant change in crude oil prices during pandemic
-3.	The increase in usage of renewable energy in recent years doesn’t affect usage of non renewable energy.
+3.	The increase in usage of renewable energy in recent years doesn’t affect usage of non renewable energy in US.
 4.	With development there in increase in per person electricity consumption in both US and around the globe.
 5.	With promotion of renewable energy in recent years, there is drop in CO2 emissions.
 ### Results:
