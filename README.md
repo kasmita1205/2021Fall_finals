@@ -10,13 +10,14 @@
 1.	There is no change in energy consumption in US during pandemic
 2.	There is no significant change in crude oil prices during pandemic
 3.	The increase in usage of renewable energy in recent years doesn’t affect usage of non renewable energy in US.
-4.	With development there in increase in per person electricity consumption in both US and around the globe.
+4.	With development there is increase in per person electricity consumption in both US and around the globe.
 5.	With promotion of renewable energy in recent years, there is drop in CO2 emissions.
 ### Results:
 1.	There is no change in energy consumption in US during pandemic 
  ![Picture4](https://user-images.githubusercontent.com/63721840/144547590-d219ff2f-bc7e-4b3a-beab-a86e47426c45.png)
 
 Based on the above graph we reject our null hypothesis that there is no change in energy consumption in US during pandemic as we can see that there is steep drop in energy consumption during year 2020 as compared to previous years. The overall energy consumption pattern recovered after April 2020 though there is significant change in amount of energy consumption.
+
 2.	There is no significant change in crude oil prices during pandemic
  
  ![Picture3](https://user-images.githubusercontent.com/63721840/144547532-229e6e95-873a-494a-a75c-dab77d9e8d4a.png)
