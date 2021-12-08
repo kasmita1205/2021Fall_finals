@@ -198,3 +198,77 @@ def energy_plot_func(energy_source_1, energy_source_2, df):
 
 # --------------------------------------------------------------------------------------------------
 
+# -----------------------------function for world energy trends-------------------------------------
+# function to form a yearly data :
+def get_yearly_df(sheet_name):
+    '''This function will thake the sheet name of the excel file and will give the world_data about that energy source
+    in raw format as a data frame and also the growth rate for that energy source as data frame
+    '''
+    # reading the file
+    world_data = pd.read_excel('bp-stats-review-2021-all-data.xlsx',sheet_name=sheet_name,skiprows=2,index_col=0)
+    df_to_drop = world_data.loc['of which: OECD':,:] # filtering unwanted rows
+    world_data.drop(df_to_drop.index,inplace=True) # dropping them
+    world_data = world_data.loc[:, :'2020.1'] # dropping unwanted columns 
+    world_data.rename(columns={'2020.1':'Growth Rate in 2020'},inplace=True)
+    growth_df = pd.DataFrame(world_data['Growth Rate in 2020']) # converting the growth_rate column into data frame
+    world_data.drop(columns=['Growth Rate in 2020'],inplace=True) # Dropping the growth_rate column also 
+    return (world_data,growth_df)
+
+def sheet_to_dict(world_data_df,growth_rate):
+    '''The function take two data freame both will be the return value of function get_yearly_df, both the data frame will be cleaned
+     and rearranged in order to plot the graphs easily. Note: the world_data_df has years as column names
+    '''
+    # Creating a dictonary for main data frame
+    df_dict = {'Year' : [],
+            'Total North America':[],
+            'Total S. & Cent. America':[],
+            'Total Europe':[],
+            'Total CIS':[],
+            'Total Middle East':[],
+            'Total Africa':[],
+            'Total Asia Pacific':[],
+            'Total World':[]}
+    # Creating a dictonary for growth rate data 
+    growth_rate_dict = {'Total North America':[],
+                'Total S. & Cent. America':[],
+                'Total Europe':[],
+                'Total CIS':[],
+                'Total Middle East':[],
+                'Total Africa':[],
+                'Total Asia Pacific':[],
+                'Total World':[]}
+
+    def round_series(r_name,df):
+        '''This function will take the row index in string and the data frame from which that row is to be pulled
+        and list is returned.
+        '''
+        lst =  [round(val,2 )for val in df.loc[r_name,:].to_list()] # the row is pulled, each value is rounded and array is converted into list
+        #print(len(l))
+        return(lst)
+    for year in [col for col in (world_data_df.columns)]: # fetching the val of column name since they are years 
+        df_dict['Year'].append(int(year)) # converting into int
+    #print(len(df_dict['Year']))
+    for key in df_dict.keys(): # Traversing the keys of df_dict
+        if key == 'Year':
+            pass
+        else:
+            # Traversing only those index value in which has string 'Total'
+            for row_name in [ind for ind in world_data_df.index if 'Total' in ind]: 
+                if row_name == key:
+                    l = round_series(row_name,world_data_df) # calling the function round_series() which will return list
+                    df_dict[key] = l # asigning the list to appropriate key of dictonary
+    # working with growth rate df
+    for key in growth_rate_dict.keys():
+        for row_name in [ind for ind in growth_rate.index if 'Total' in ind]:
+            if row_name == key:
+                l = round_series(row_name,growth_rate) # calling the round_series() function 
+                growth_rate_dict[key] = l
+
+
+
+    # converting both the dictonaries into data frame 
+    main_df = pd.DataFrame(data = df_dict) 
+    growth_df = pd.DataFrame(data = growth_rate_dict)
+
+    return (main_df,growth_df) # returning a set
+
