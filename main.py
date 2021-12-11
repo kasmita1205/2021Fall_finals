@@ -262,7 +262,7 @@ def sheet_to_dict(world_data_df,growth_rate):
         for row_name in [ind for ind in growth_rate.index if 'Total' in ind]:
             if row_name == key:
                 l = round_series(row_name,growth_rate) # calling the round_series() function 
-                growth_rate_dict[key] = l
+                growth_rate_dict[key] = [x*100 for x in l]
 
 
 
@@ -271,4 +271,24 @@ def sheet_to_dict(world_data_df,growth_rate):
     growth_df = pd.DataFrame(data = growth_rate_dict)
 
     return (main_df,growth_df) # returning a set
+
+#
+# function to plot the graph
+def plot_graph_file_name(filename,title):
+    raw_df, raw_df_growth = get_yearly_df(filename)[0], get_yearly_df(filename)[1] 
+    both_df = sheet_to_dict(raw_df,raw_df_growth)
+    final_energy_data = both_df[0]
+    final_energy_growth = both_df[1]
+    print('Growth Rate - 2020')
+    plt.figure(figsize=(15,8))
+    for col in [col for col in final_energy_data.columns if col !='Year']:
+        sns.set_theme(style="darkgrid")
+        sns.lineplot(data = final_energy_data,x = [int(x) for x in final_energy_data['Year']],
+        y = final_energy_data[col], marker="o")
+    plt.legend([col for col in final_energy_data.columns if col !='Year'])
+    plt.title(title,fontname="Times New Roman", size=20,fontweight = 'bold')
+    plt.xlabel('Year',fontweight = 'bold',fontname="Times New Roman",size= 15)
+    plt.ylabel(filename,fontweight = 'bold',fontname="Times New Roman",size = 15)
+
+    return final_energy_growth
 
