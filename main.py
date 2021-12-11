@@ -1,14 +1,16 @@
-#import libraries
+# import libraries
 import pandas as pd
 import numpy as np
 import warnings
 import matplotlib.pyplot as plt
-import seaborn as sns
-warnings.filterwarnings('ignore')
+from pandas.core.frame import DataFrame
 import datetime as dt
 import calendar
+import seaborn as sns
+warnings.filterwarnings('ignore')
 
-#function to filter covid data by country
+
+# function to filter covid data by country
 def get_country_data(frame: pd.DataFrame, country_code: str) -> pd.DataFrame:
     """
     This function filters the covid data by specific country.
@@ -20,7 +22,8 @@ def get_country_data(frame: pd.DataFrame, country_code: str) -> pd.DataFrame:
     df.drop(['WHO_region', 'New_deaths', 'Cumulative_deaths', 'Country'], axis=1, inplace=True)
     return df
 
-#function to process dataframe
+
+# function to process dataframe
 def process_dataframe(frame: pd.DataFrame, year) -> pd.DataFrame:
     """
     Function to preprocess dataframe for datetime and filter data for year 2020-2021.
@@ -32,11 +35,12 @@ def process_dataframe(frame: pd.DataFrame, year) -> pd.DataFrame:
     frame['month'] = frame['Date'].dt.month
     frame['year'] = frame['Date'].dt.year
     frame = frame[frame['year'].isin(year)]
-    frame['date']=frame['Date'].dt.strftime('%m-%Y')
-    frame.reset_index(inplace =True,drop=True)
+    frame['date'] = frame['Date'].dt.strftime('%m-%Y')
+    frame.reset_index(inplace=True, drop=True)
     return frame
 
-def compare_monthly_energy_with_covid(frame: pd.DataFrame, covid_df :pd.DataFrame):
+
+def compare_monthly_energy_with_covid(frame: pd.DataFrame, covid_df: pd.DataFrame):
     """
 
     :param frame: Dataframe with monthly energy data
@@ -44,17 +48,18 @@ def compare_monthly_energy_with_covid(frame: pd.DataFrame, covid_df :pd.DataFram
     :return: plot
     """
     frame = frame.iloc[1:]
-    frame.rename(columns = {'Month':"Date"}, inplace =True)
+    frame.rename(columns={'Month': "Date"}, inplace=True)
     frame['Date'] = pd.to_datetime(frame['Date'])
-    y=[2017,2018,2019,2020,2021]
+    y = [2017, 2018, 2019, 2020, 2021]
     frame = process_dataframe(frame, y)
-    frame =frame[['Date', 'Total Fossil Fuels Consumption','Total Renewable Energy Consumption','Total Primary Energy Consumption', 'year','month']]
-    frame =pd.merge(frame, covid_df, on=['year','month'], how='left')
-    frame.drop(columns= {'year','month','Cumulative_cases'}, inplace =True)
-    fig, ax = plt.subplots(figsize = (15,6))
-    ax.plot(frame['New_cases'], label='no of cases', color ='r')
+    frame = frame[['Date', 'Total Fossil Fuels Consumption', 'Total Renewable Energy Consumption',
+                   'Total Primary Energy Consumption', 'year', 'month']]
+    frame = pd.merge(frame, covid_df, on=['year', 'month'], how='left')
+    frame.drop(columns={'year', 'month', 'Cumulative_cases'}, inplace=True)
+    fig, ax = plt.subplots(figsize=(15, 6))
+    ax.plot(frame['New_cases'], label='no of cases', color='r')
     ax.legend(loc=1)
-    plt.xticks(np.arange(0,56,1), frame['Date'].dt.strftime('%m-%Y'), rotation=60)
+    plt.xticks(np.arange(0, 56, 1), frame['Date'].dt.strftime('%m-%Y'), rotation=60)
     plt.ylabel("Covid Cases (in Million)")
     plt.xlabel("Timeline")
     ax2 = ax.twinx()
@@ -62,7 +67,7 @@ def compare_monthly_energy_with_covid(frame: pd.DataFrame, covid_df :pd.DataFram
     ax2.legend(loc=2)
     plt.ylabel("Energy Consumption(in Quadrillion Btu)")
     plt.title("Energy Consumption in US during pandemic")
-    x=[12,24,36,48]
+    x = [12, 24, 36, 48]
     for i in x:
         plt.axvline(x=i, c='y')
     plt.show()
@@ -121,8 +126,6 @@ def per_person_electricity_consumption(population: pd.DataFrame, total_electrici
     plt.xticks(rotation=90)
     plt.show()
 
-
-# ------------------------------------------------------------------------------------
 # function to clean fuel_price_df
 def clean_fuel_price(df):
     fuel_price = df.T.copy()
@@ -136,32 +139,34 @@ def clean_fuel_price(df):
     fuel_price = fuel_price[['Date/Time', 'OPEC - ORB']]
     return fuel_price
 
+#
+# def plot_null_values(df):
+#     '''This function give a rough idea about the presence of null values in the dataframe
+#     '''
+#     print('The shape of data frame is = {}'.format(df.shape))
+#     plt.subplots(figsize=(20, 5))
+#     sns.heatmap(df.isna(), yticklabels=False)
+#     plt.xlabel('Column Name', fontsize=15)
+#     plt.title('Missing value plot', fontsize=15)
+#
+#     plt.show()
 
-def plot_null_values(df):
-    '''This function give a rough idea about the presence of null values in the dataframe
-    '''
-    print('The shape of data frame is = {}'.format(df.shape))
-    plt.subplots(figsize=(20, 5))
-    sns.heatmap(df.isna(), yticklabels=False)
-    plt.xlabel('Column Name', fontsize=15)
-    plt.title('Missing value plot', fontsize=15)
 
-    plt.show()
-
-
-def change_to_datetime(df):
-    '''This function will check the column names of the data frame df and then will compare it with the words provided
-    in word list, if any of the word present in column name matches with the word in the list the data type of the column
-    will be changed to datetime format.
-    '''
-    word_date = ['Date', 'date', 'Month', 'month', 'Year', 'year']
+def change_to_datetime(df: DataFrame) -> None:
+    """
+    :param df: DataFrame of which name of columns will be compared to the list and
+    data types will be changed
+    :return: None
+    """
+    # To fix errors in pd.to_datetime reference was taken from ->
+    # https://datascientyst.com/how-to-fix-pandas-to_datetime-wrong-date-and-errors/
+    word_date = ['Date', 'date', 'Month', 'month', 'Year', 'year']  # creating list of words
     for column_name in [column for word in word_date for column in df.columns if word in column]:
-        # print(column_name)
         df[column_name] = pd.to_datetime(df[column_name], errors='coerce')
 
 
 ######################
-def give_covid_df_yearly(year, country, data):
+def give_covid_df_yearly(year, country, data: DataFrame):
     df = data[['Date_reported', 'Country', 'New_cases']]  # selecting required cols
     df_filtered = pd.DataFrame()
     if country != 'all':
@@ -175,7 +180,6 @@ def give_covid_df_yearly(year, country, data):
     change_to_datetime(df_grouped)
 
     return df_grouped
-
 
 def get_monthly_covid_df(country_name, dataf):
     df_2020 = give_covid_df_yearly(2020, country_name, dataf)
@@ -196,87 +200,96 @@ def energy_plot_func(energy_source_1, energy_source_2, df):
     plt.title(energy_source_1 + ' and ' + energy_source_2 + ' analysis')
     plt.show()
 
-# --------------------------------------------------------------------------------------------------
 
+# --------------------------------------------------------------------------------------------------
 # -----------------------------function for world energy trends-------------------------------------
 # function to form a yearly data :
-def get_yearly_df(sheet_name):
-    '''This function will thake the sheet name of the excel file and will give the world_data about that energy source
-    in raw format as a data frame and also the growth rate for that energy source as data frame
-    '''
+def get_yearly_df(sheet_name: str) -> DataFrame:
+    """
+    :param sheet_name: excel file sheet name of which analysis is to be done
+    :return: filtered data frame of growth rate and rest of regions
+    """
     # reading the file
-    world_data = pd.read_excel('bp-stats-review-2021-all-data.xlsx',sheet_name=sheet_name,skiprows=2,index_col=0)
-    df_to_drop = world_data.loc['of which: OECD':,:] # filtering unwanted rows
-    world_data.drop(df_to_drop.index,inplace=True) # dropping them
-    world_data = world_data.loc[:, :'2020.1'] # dropping unwanted columns 
-    world_data.rename(columns={'2020.1':'Growth Rate in 2020'},inplace=True)
-    growth_df = pd.DataFrame(world_data['Growth Rate in 2020']) # converting the growth_rate column into data frame
-    world_data.drop(columns=['Growth Rate in 2020'],inplace=True) # Dropping the growth_rate column also 
-    return (world_data,growth_df)
+    world_data = pd.read_excel('bp-stats-review-2021-all-data.xlsx', sheet_name=sheet_name, skiprows=2, index_col=0)
+    df_to_drop = world_data.loc['of which: OECD':, :]  # filtering unwanted rows
+    world_data.drop(df_to_drop.index, inplace=True)  # dropping them
+    world_data = world_data.loc[:, :'2020.1']  # dropping unwanted columns
+    world_data.rename(columns={'2020.1': 'Growth Rate in 2020'}, inplace=True)
+    growth_df = pd.DataFrame(world_data['Growth Rate in 2020'])  # converting the growth_rate column into data frame
+    world_data.drop(columns=['Growth Rate in 2020'], inplace=True)  # Dropping the growth_rate column also
+    return (world_data, growth_df) # return a tuple
 
-def sheet_to_dict(world_data_df,growth_rate):
-    '''The function take two data freame both will be the return value of function get_yearly_df, both the data frame will be cleaned
-     and rearranged in order to plot the graphs easily. Note: the world_data_df has years as column names
-    '''
-    # Creating a dictonary for main data frame
-    df_dict = {'Year' : [],
-            'Total North America':[],
-            'Total S. & Cent. America':[],
-            'Total Europe':[],
-            'Total CIS':[],
-            'Total Middle East':[],
-            'Total Africa':[],
-            'Total Asia Pacific':[],
-            'Total World':[]}
-    # Creating a dictonary for growth rate data 
-    growth_rate_dict = {'Total North America':[],
-                'Total S. & Cent. America':[],
-                'Total Europe':[],
-                'Total CIS':[],
-                'Total Middle East':[],
-                'Total Africa':[],
-                'Total Asia Pacific':[],
-                'Total World':[]}
 
-    def round_series(r_name,df):
-        '''This function will take the row index in string and the data frame from which that row is to be pulled
-        and list is returned.
-        '''
-        lst =  [round(val,2 )for val in df.loc[r_name,:].to_list()] # the row is pulled, each value is rounded and array is converted into list
-        #print(len(l))
-        return(lst)
-    for year in [col for col in (world_data_df.columns)]: # fetching the val of column name since they are years 
-        df_dict['Year'].append(int(year)) # converting into int
-    #print(len(df_dict['Year']))
-    for key in df_dict.keys(): # Traversing the keys of df_dict
+def sheet_to_dict(world_data_df: DataFrame, growth_rate: DataFrame) -> DataFrame:
+    """
+    The function will take the input from function get_yearly_df() and will also plot the line plot
+    :param world_data_df: Data frame, first return value of get_yearly_df()
+    :param growth_rate: Data frame, second return valur of get_yearly_df()
+    :return: DataFrame, of the growth rate 2020
+    """
+    # Creating a dictionary for main data frame
+    df_dict = {'Year': [], 'Total North America': [], 'Total S. & Cent. America': [],
+               'Total Europe': [],
+               'Total CIS': [],
+               'Total Middle East': [],
+               'Total Africa': [],
+               'Total Asia Pacific': [],
+               'Total World': []}
+    # Creating a dictionary for growth rate data
+    growth_rate_dict = {'Total North America': [],
+                        'Total S. & Cent. America': [],
+                        'Total Europe': [],
+                        'Total CIS': [],
+                        'Total Middle East': [],
+                        'Total Africa': [],
+                        'Total Asia Pacific': [],
+                        'Total World': []}
+
+    def round_series(r_name: str, df: DataFrame) -> list:
+        """
+        :param r_name: index name of the data frame
+        :param df: data frame from which row is to be pulled
+        :return: list, rounding each element from the array
+        """
+        # the row is pulled, each value is rounded and array is converted into list
+        lst = [round(val, 2) for val in df.loc[r_name, :].to_list()]
+        return lst
+
+    # fetching the val of column name since they are years
+    for year in [col for col in world_data_df.columns]:
+        df_dict['Year'].append(int(year))  # converting into int
+    for key in df_dict.keys():  # Traversing the keys of df_dict
         if key == 'Year':
             pass
         else:
             # Traversing only those index value in which has string 'Total'
-            for row_name in [ind for ind in world_data_df.index if 'Total' in ind]: 
+            for row_name in [ind for ind in world_data_df.index if 'Total' in ind]:
                 if row_name == key:
-                    l = round_series(row_name,world_data_df) # calling the function round_series() which will return list
-                    df_dict[key] = l # asigning the list to appropriate key of dictonary
+                    # calling the function round_series() which will return list
+                    l = round_series(row_name, world_data_df)
+                    df_dict[key] = l  # assigning  the list to appropriate key of dictionary
     # working with growth rate df
     for key in growth_rate_dict.keys():
         for row_name in [ind for ind in growth_rate.index if 'Total' in ind]:
             if row_name == key:
-                l = round_series(row_name,growth_rate) # calling the round_series() function 
-                growth_rate_dict[key] = [x*100 for x in l]
+                l = round_series(row_name, growth_rate)  # converting array to a list
+                growth_rate_dict[key] = [x * 100 for x in l]
+
+    # converting both the dictionaries into data frame
+    main_df = pd.DataFrame(data=df_dict)
+    growth_df = pd.DataFrame(data=growth_rate_dict)
+
+    return (main_df, growth_df)  # returning a tuple
 
 
-
-    # converting both the dictonaries into data frame 
-    main_df = pd.DataFrame(data = df_dict) 
-    growth_df = pd.DataFrame(data = growth_rate_dict)
-
-    return (main_df,growth_df) # returning a set
-
-#
 # function to plot the graph
-def plot_graph_file_name(filename,title):
-    ''' The function will take the file name and Title to plot the line graph
-    '''
+def plot_graph_file_name(filename: str, title: str) -> DataFrame:
+    """
+    The function will take the file name and Title to plot the line graph
+    :param filename: The file name indicates the name of sheet name of excel file to analyse
+    :param title: The title of the graph
+    :return: Data Frame of growth rate in the year 2020
+    """
     # Calling the function get_yearly_df to clean the data
     raw_df, raw_df_growth = get_yearly_df(filename)[0], get_yearly_df(filename)[1]
     # Calling the function to get the set of two data frames
@@ -285,15 +298,13 @@ def plot_graph_file_name(filename,title):
     final_energy_growth = both_df[1]  # fetching the cleaned data frame of %change in 2020
     print('Growth Rate - 2020')
     # Code for plotting the line graph
-    plt.figure(figsize=(15, 8))
+    plt.figure(figsize=(15, 8))  # Setting the figure size
     for col in [col for col in final_energy_data.columns if col != 'Year']:
-        sns.set_theme(style="darkgrid")
+        sns.set_theme(style="darkgrid")  # Setting the theme
         sns.lineplot(data=final_energy_data, x=[int(x) for x in final_energy_data['Year']],
-        y=final_energy_data[col], marker="o")
-    plt.legend([col for col in final_energy_data.columns if col !='Year']) # Giving the legend
-    plt.title(title, fontname="Times New Roman", size=20, fontweight = 'bold')
+                     y=final_energy_data[col], marker="o")  # plotting line graph
+    plt.legend([col for col in final_energy_data.columns if col != 'Year'])  # Giving the legend
+    plt.title(title, fontname="Times New Roman", size=20, fontweight='bold')
     plt.xlabel('Year', fontweight='bold', fontname="Times New Roman", size=15)
     plt.ylabel(filename, fontweight='bold', fontname="Times New Roman", size=15)
-
     return final_energy_growth
-
