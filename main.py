@@ -275,20 +275,25 @@ def sheet_to_dict(world_data_df,growth_rate):
 #
 # function to plot the graph
 def plot_graph_file_name(filename,title):
-    raw_df, raw_df_growth = get_yearly_df(filename)[0], get_yearly_df(filename)[1] 
-    both_df = sheet_to_dict(raw_df,raw_df_growth)
-    final_energy_data = both_df[0]
-    final_energy_growth = both_df[1]
+    ''' The function will take the file name and Title to plot the line graph
+    '''
+    # Calling the function get_yearly_df to clean the data
+    raw_df, raw_df_growth = get_yearly_df(filename)[0], get_yearly_df(filename)[1]
+    # Calling the function to get the set of two data frames
+    both_df = sheet_to_dict(raw_df, raw_df_growth)
+    final_energy_data = both_df[0]  # fetching the cleaned data frame of energy from the set both_df
+    final_energy_growth = both_df[1]  # fetching the cleaned data frame of %change in 2020
     print('Growth Rate - 2020')
-    plt.figure(figsize=(15,8))
-    for col in [col for col in final_energy_data.columns if col !='Year']:
+    # Code for plotting the line graph
+    plt.figure(figsize=(15, 8))
+    for col in [col for col in final_energy_data.columns if col != 'Year']:
         sns.set_theme(style="darkgrid")
-        sns.lineplot(data = final_energy_data,x = [int(x) for x in final_energy_data['Year']],
-        y = final_energy_data[col], marker="o")
-    plt.legend([col for col in final_energy_data.columns if col !='Year'])
-    plt.title(title,fontname="Times New Roman", size=20,fontweight = 'bold')
-    plt.xlabel('Year',fontweight = 'bold',fontname="Times New Roman",size= 15)
-    plt.ylabel(filename,fontweight = 'bold',fontname="Times New Roman",size = 15)
+        sns.lineplot(data=final_energy_data, x=[int(x) for x in final_energy_data['Year']],
+        y=final_energy_data[col], marker="o")
+    plt.legend([col for col in final_energy_data.columns if col !='Year']) # Giving the legend
+    plt.title(title, fontname="Times New Roman", size=20, fontweight = 'bold')
+    plt.xlabel('Year', fontweight='bold', fontname="Times New Roman", size=15)
+    plt.ylabel(filename, fontweight='bold', fontname="Times New Roman", size=15)
 
     return final_energy_growth
 
