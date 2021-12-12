@@ -7,12 +7,14 @@ from pandas.core.frame import DataFrame
 import datetime as dt
 import calendar
 import seaborn as sns
+
 warnings.filterwarnings('ignore')
 
 
 # function to filter covid data by country
 def get_country_data(frame: pd.DataFrame, country_code: str) -> pd.DataFrame:
     """
+
     This function filters the covid data by specific country.
     :param frame: original data frame that needs to be filtered.
     :param country_code: country code to filter based on country.
@@ -40,9 +42,10 @@ def process_dataframe(frame: pd.DataFrame, year) -> pd.DataFrame:
     return frame
 
 
+# plot to compare monthly energy consumption in pre covid and during covid scenarios.
 def compare_monthly_energy_with_covid(frame: pd.DataFrame, covid_df: pd.DataFrame):
     """
-
+    This function plots comparison between monthly energy consumption before and during pandemic in US.
     :param frame: Dataframe with monthly energy data
     :param covid_df: Dataframe with monthly covid data
     :return: plot
@@ -74,6 +77,11 @@ def compare_monthly_energy_with_covid(frame: pd.DataFrame, covid_df: pd.DataFram
 
 
 def process_electricity_consumption(total_electricity_consump: pd.DataFrame):
+    """
+    Process the dataframe with total electricity consumption around world and US.
+    :param total_electricity_consump: dataframe containing total electricity data
+    :return: processed dataframe with required columns for plotting total electricity consumption
+    """
     total_electricity_consump.reset_index(inplace=True, drop=True)
     total_electricity_consump.drop("API", axis=1, inplace=True)
     total_electricity_consump.rename(columns={"Unnamed: 1": "Geography"}, inplace=True)
@@ -88,7 +96,14 @@ def process_electricity_consumption(total_electricity_consump: pd.DataFrame):
     return total_electricity_consump
 
 
+# calculate per person electricity consumption in US and World.
 def per_person_electricity_consumption(population: pd.DataFrame, total_electricity_consump: pd.DataFrame):
+    """
+    This function plots the per capita electricity consumption around the world and US and it's changes over the years.
+    :param population: contains data related to population.
+    :param total_electricity_consump: dataframe from process_electricity_consumption
+    :return: plots for per capita consumption over the years.
+    """
     population = population.iloc[1:, 1:]
     population.rename(columns={'Unnamed: 1': "Geography"}, inplace=True)
     population = population.set_index("Geography")
@@ -125,6 +140,7 @@ def per_person_electricity_consumption(population: pd.DataFrame, total_electrici
     plt.title("Per person Energy Consumption in US")
     plt.xticks(rotation=90)
     plt.show()
+
 
 # function to clean fuel_price_df
 def clean_fuel_price(df):
@@ -169,6 +185,7 @@ def give_covid_df_yearly(year, country, data: DataFrame):
 
     return df_grouped
 
+
 def get_monthly_covid_df(country_name, dataf):
     df_2020 = give_covid_df_yearly(2020, country_name, dataf)
     df_2021 = give_covid_df_yearly(2021, country_name, dataf)
@@ -205,7 +222,7 @@ def get_yearly_df(sheet_name: str) -> DataFrame:
     world_data.rename(columns={'2020.1': 'Growth Rate in 2020'}, inplace=True)
     growth_df = pd.DataFrame(world_data['Growth Rate in 2020'])  # converting the growth_rate column into data frame
     world_data.drop(columns=['Growth Rate in 2020'], inplace=True)  # Dropping the growth_rate column also
-    return (world_data, growth_df) # return a tuple
+    return (world_data, growth_df)  # return a tuple
 
 
 def sheet_to_dict(world_data_df: DataFrame, growth_rate: DataFrame) -> DataFrame:
