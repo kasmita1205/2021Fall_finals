@@ -313,3 +313,97 @@ def plot_graph_file_name(filename: str, title: str) -> DataFrame:
     plt.xlabel('Year', fontweight='bold', fontname="Times New Roman", size=15)
     plt.ylabel(filename, fontweight='bold', fontname="Times New Roman", size=15)
     return final_energy_growth
+
+
+def percent_change(frame: pd.DataFrame, colname: str, newcolname: str) -> pd.DataFrame:
+    frame[newcolname] = np.nan
+    for row in range(1, len(frame[colname])):
+        if (frame[colname][row] == '--'):
+            frame[colname][row] = np.nan
+        frame[newcolname][row] = ((float(frame[colname][row]) - float(frame[colname][row - 1])) / float(
+            frame[colname][row])) * 100
+    return frame
+
+
+def plot_emission_vs_energy(col1, col2, col3, label1, label2, title):
+    fig, ax = plt.subplots(figsize=(15, 6))
+    ax.plot(col1, col2.astype(float), color='r', label=label1)
+    ax.legend(loc=1)
+    plt.ylabel(label1)
+    plt.xlabel("Timeline")
+    plt.xticks(rotation=90)
+    ax2 = ax.twinx()
+    ax2.plot(col3.astype(float), color='b', label=label2)
+    ax2.legend(loc=2)
+    plt.ylabel(label2)
+    plt.title(title)
+    plt.show()
+
+
+def plot_per_change_emission_vs_energy(col1, col2, col3, label, title, l1, l2):
+    plt.figure(figsize=(12, 6))
+    plt.plot(col1, col2, color='r')
+    plt.plot(col1, col3, color='g')
+    plt.legend(labels=[l1, l2])
+    plt.xticks(rotation=90)
+    plt.ylabel(label)
+    plt.title(title)
+    plt.show()
+
+
+def prepare_emission_consumption(frame_emission, frame_consumption):
+    frame_emission.reset_index(inplace=True)
+    frame_emission = frame_emission.iloc[2:, 2:]
+    frame_emission.rename(columns={'Unnamed: 1': "Emissions"}, inplace=True)
+    frame_emission = frame_emission.set_index("Emissions")
+    frame_emission = pd.DataFrame.transpose(frame_emission)
+    frame_emission.reset_index(inplace=True)
+    frame_emission.rename(columns={'index': "Year"}, inplace=True)
+    for x in frame_emission.columns:
+        frame_emission.rename(columns={x: x.strip()}, inplace=True)
+    frame_emission = frame_emission.iloc[:, :2]
+    frame_emission = percent_change(frame_emission, 'CO2 emissions (MMtonnes CO2)', '%change emission')
+    frame_consumption.drop("API", axis=1, inplace=True)
+    frame_consumption.rename(columns={"Unnamed: 1": "Geography"}, inplace=True)
+    frame_consumption = frame_consumption.iloc[1:, :]
+    frame_consumption.set_index('Geography', inplace=True)
+    frame_consumption = pd.DataFrame.transpose(frame_consumption)
+    frame_consumption.reset_index(inplace=True)
+    frame_consumption.rename(columns={"index": "Year"}, inplace=True)
+    for x in frame_consumption.columns:
+        frame_consumption.rename(columns={x: x.lstrip()}, inplace=True)
+    frame_consumption = frame_consumption.iloc[:, :6]
+    frame_consumption['Total Fossil Fuel'] = frame_consumption['Coal (quad Btu)'].astype(float) + frame_consumption[
+        'Natural gas (quad Btu)'].astype(float) + frame_consumption['Petroleum and other liquids (quad Btu)'].astype(
+        float)
+    frame_consumption = percent_change(frame_consumption, 'Total Fossil Fuel', '%change Fossil Fuel')
+    frame_consumption = percent_change(frame_consumption, 'Nuclear, renewables, and other (quad Btu)',
+                                       '%change Renewable')
+    frame_consumption = percent_change(frame_consumption, 'Consumption (quad Btu)', '%change total consumption')
+    frame_emission = pd.merge(frame_emission, frame_consumption, on='Year', how='inner')
+    frame_emission.iloc[0, 2] = np.nan
+    plot_emission_vs_energy(frame_emission['Year'], frame_emission['CO2 emissions (MMtonnes CO2)'].astype(float),
+                            frame_emission['Consumption (quad Btu)'], "CO2 Emissions (in MMtonnes CO2)",
+                            'Energy Consumption(in Quadrillion Btu)',
+                            'Emissions vs Total Energy Consumptions over the years')
+    plot_emission_vs_energy(frame_emission['Year'], frame_emission['CO2 emissions (MMtonnes CO2)'].astype(float),
+                            frame_emission['Total Fossil Fuel'].astype(float), "CO2 Emissions (in MMtonnes CO2)",
+                            ' Fossil Energy Consumption(in Quadrillion Btu)',
+                            'Emissions vs Fossil Energy Consumptions over the years')
+    plot_emission_vs_energy(frame_emission['Year'], frame_emission['CO2 emissions (MMtonnes CO2)'].astype(float),
+                            frame_emission['Nuclear, renewables, and other (quad Btu)'].astype(float),
+                            "CO2 Emissions (in MMtonnes CO2)", ' Renewable Energy Consumption(in Quadrillion Btu)',
+                            'Emissions vs Renewable Energy Consumptions over the years')
+    plot_per_change_emission_vs_energy(frame_emission['Year'], frame_emission['%change emission'],
+                                       frame_emission['%change total consumption'], 'Percentage change',
+                                       ' Percent change in total emission vs total consumption over years',
+                                       'CO2 emission', "Total Consumption")
+    plot_per_change_emission_vs_energy(frame_emission['Year'], frame_emission['%change emission'],
+                                       frame_emission['%change Fossil Fuel'], 'Percentage change',
+                                       ' Percent change in total emission vs total fossil fuel  energy consumption over years',
+                                       'CO2 emission', "Total  Fossil fuel Consumption")
+    plot_per_change_emission_vs_energy(frame_emission['Year'], frame_emission['%change emission'],
+                                       frame_emission['%change Renewable'], 'Percentage change',
+                                       ' Percent change in total emission vs total renewable energy consumption over years',
+                                       'CO2 emission', "Total Renewable Consumption")
+
