@@ -12,6 +12,14 @@
 3.	The increase in usage of renewable energy in recent years doesn’t affect usage of non renewable energy in US.
 4.	With development there is increase in per person electricity consumption in both US and around the globe.
 5.	With promotion of renewable energy in recent years, there is drop in CO2 emissions.
+### Insights from the Global Energy Trends:
+- Total of energy consumption all over the world has been constantly rising, but talking about the different regions except Asia Pacific total of energy consumption almost at a constant rate after the year 2000.  
+- The World is shifting towards renewable energy, drastic shift can be seen after the year 2010 but from the graph of CO2 emissions it seems that this transition needs to be done at a higher rate. On one hand amount of CO2 emissions increased drastically after 2000 in Asia Pacific but on the other hand amount of emissions seems to be decreasing slightly in the Europe and North America. 
+- Moreover it can also seen that major producer and consumer of nuclear energy are North America and Europe and talking about the coal consumption and production then western regions such as North America and Europe have reduced successfully but one the other hand rate of coal consumption and production has increased tremendously in Asia Pacific after year 2000. 
+- Talking about natural gas and oil production and consumption Middle east, North America and Commonwealth of Independent States (CIS) are major producers of oil and natural gas and Asia Pacific and North America are the major consumers of oil and natural gas.
+- Although Asia Pacific overtook other regions in production and consumption of renewable energy but the same region is the major contributor in CO2 emissions. 
+ The COVID-19 impact: COVID-19 had negatively affected whole energy sector. Growth rate (in year 2020) of production and consumption of almost every is in negative except the --- Renewable energy. A decent amount of growth rate i.e., 12 % is observed in production of all over renewable sector moreover CIS region has shown impressive growth rate of 112%. Oil consumption and production seems to be most affected by the COVID-19 with -10% and -7% respectively.
+
 ### Results:
 1.	There is no change in energy consumption in US during pandemic 
  ![Picture4](https://user-images.githubusercontent.com/63721840/144547590-d219ff2f-bc7e-4b3a-beab-a86e47426c45.png)
