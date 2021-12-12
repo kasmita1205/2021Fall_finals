@@ -316,16 +316,33 @@ def plot_graph_file_name(filename: str, title: str) -> DataFrame:
 
 
 def percent_change(frame: pd.DataFrame, colname: str, newcolname: str) -> pd.DataFrame:
+    """
+
+    :param frame: input frame
+    :param colname: column from frame to calculate percent change.
+    :param newcolname: new column name where percent change is stored
+    :return: frame with percent change column
+    """
     frame[newcolname] = np.nan
     for row in range(1, len(frame[colname])):
         if (frame[colname][row] == '--'):
             frame[colname][row] = np.nan
         frame[newcolname][row] = ((float(frame[colname][row]) - float(frame[colname][row - 1])) / float(
-            frame[colname][row])) * 100
+            frame[colname][row-1])) * 100
     return frame
 
 
-def plot_emission_vs_energy(col1, col2, col3, label1, label2, title):
+def plot_emission_vs_energy(col1: str, col2 : str, col3: str, label1: str, label2: str, title: str):
+    """
+    function to plot emission vs energy consumption.
+    :param col1:
+    :param col2:
+    :param col3:
+    :param label1:
+    :param label2:
+    :param title:
+    :return:
+    """
     fig, ax = plt.subplots(figsize=(15, 6))
     ax.plot(col1, col2.astype(float), color='r', label=label1)
     ax.legend(loc=1)
@@ -340,7 +357,18 @@ def plot_emission_vs_energy(col1, col2, col3, label1, label2, title):
     plt.show()
 
 
-def plot_per_change_emission_vs_energy(col1, col2, col3, label, title, l1, l2):
+def plot_per_change_emission_vs_energy(col1: str, col2: str, col3: str, label: str, title :str, l1: str, l2: str):
+    """
+    function to plot percent change in emission and percentage change in energy over time.
+    :param col1:
+    :param col2:
+    :param col3:
+    :param label:
+    :param title:
+    :param l1:
+    :param l2:
+    :return:
+    """
     plt.figure(figsize=(12, 6))
     plt.plot(col1, col2, color='r')
     plt.plot(col1, col3, color='g')
@@ -351,7 +379,13 @@ def plot_per_change_emission_vs_energy(col1, col2, col3, label, title, l1, l2):
     plt.show()
 
 
-def prepare_emission_consumption(frame_emission, frame_consumption):
+def prepare_emission_consumption(frame_emission: pd.DataFrame, frame_consumption: pd.DataFrame):
+    """
+    function to prepare and plot CO2 emission vs consumption
+    :param frame_emission: dataframe containing CO2 emissions data
+    :param frame_consumption: dataframe containing world energy consumption data with different categories.
+    :return:
+    """
     frame_emission.reset_index(inplace=True)
     frame_emission = frame_emission.iloc[2:, 2:]
     frame_emission.rename(columns={'Unnamed: 1': "Emissions"}, inplace=True)
