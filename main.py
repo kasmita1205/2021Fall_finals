@@ -215,7 +215,7 @@ def get_yearly_df(sheet_name: str) -> DataFrame:
     :return: filtered data frame of growth rate and rest of regions
     """
     # reading the file
-    world_data = pd.read_excel('bp-stats-review-2021-all-data.xlsx', sheet_name=sheet_name, skiprows=2, index_col=0)
+    world_data = pd.read_excel('Data/bp-stats-review-2021-all-data.xlsx', sheet_name=sheet_name, skiprows=2, index_col=0)
     df_to_drop = world_data.loc['of which: OECD':, :]  # filtering unwanted rows
     world_data.drop(df_to_drop.index, inplace=True)  # dropping them
     world_data = world_data.loc[:, :'2020.1']  # dropping unwanted columns
