@@ -44,4 +44,8 @@ As from the plot we can see that for the past two decades the consumption of ren
 4.	With development there in increase in per person electricity consumption in both US and around the globe.
 Over the years it is observed that per capita energy consumption has increased around the globe but interestingly the negative trend is observed in case of US after year 2008. Hence, the hypothesis is true when considering global energy consumption but it is not true in case of every country.
 
-![Picture1](https://user-images.githubusercontent.com/63721840/144547450-d814b167-9334-4e63-9ee0-2de24c7af590.png)
+![Screenshot 2021-12-12 033613](https://user-images.githubusercontent.com/63721840/145707419-075050be-57d4-4e07-8f30-98f6129d4630.png)
+
+
+
+
