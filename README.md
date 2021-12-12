@@ -12,7 +12,7 @@
 2.	There is no significant change in crude oil prices during pandemic
 3.	The increase in usage of renewable energy in recent years doesn’t affect usage of non renewable energy in US.
 4.	With development there is increase in per person electricity consumption in both US and around the globe.
-5.	With promotion of renewable energy in recent years, there is drop in CO2 emissions.
+5.	With promotion of renewable energy in recent years, there is drop in CO2 emissions globally.
 ### Insights from the Global Energy Trends:
 - Total of energy consumption all over the world has been constantly rising, but talking about the different regions except Asia Pacific total of energy consumption almost at a constant rate after the year 2000.  
 - The World is shifting towards renewable energy, drastic shift can be seen after the year 2010 but from the graph of CO2 emissions it seems that this transition needs to be done at a higher rate. On one hand amount of CO2 emissions increased drastically after 2000 in Asia Pacific but on the other hand amount of emissions seems to be decreasing slightly in the Europe and North America. 
