@@ -318,7 +318,7 @@ def plot_graph_file_name(filename: str, title: str) -> DataFrame:
 def percent_change(frame: pd.DataFrame, colname: str, newcolname: str) -> pd.DataFrame:
     """
     function to calculate percentage change for the given column.
-    :param frame: input frame
+    :param frame: input frame.
     :param colname: column from frame to calculate percent change.
     :param newcolname: new column name where percent change is stored
     :return: frame with percent change column
