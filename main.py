@@ -139,18 +139,6 @@ def clean_fuel_price(df):
     fuel_price = fuel_price[['Date/Time', 'OPEC - ORB']]
     return fuel_price
 
-#
-# def plot_null_values(df):
-#     '''This function give a rough idea about the presence of null values in the dataframe
-#     '''
-#     print('The shape of data frame is = {}'.format(df.shape))
-#     plt.subplots(figsize=(20, 5))
-#     sns.heatmap(df.isna(), yticklabels=False)
-#     plt.xlabel('Column Name', fontsize=15)
-#     plt.title('Missing value plot', fontsize=15)
-#
-#     plt.show()
-
 
 def change_to_datetime(df: DataFrame) -> None:
     """
