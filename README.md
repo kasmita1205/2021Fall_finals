@@ -25,7 +25,7 @@
 1.	There is no change in energy consumption in US during pandemic 
  ![Picture4](https://user-images.githubusercontent.com/63721840/144547590-d219ff2f-bc7e-4b3a-beab-a86e47426c45.png)
 
-Based on the above graph we reject our null hypothesis that there is no change in energy consumption in US during pandemic as we can see that there is steep drop in energy consumption during year 2020 as compared to previous years. The overall energy consumption pattern recovered after April 2020 though there is significant change in amount of energy consumption.
+Based on the above graph we reject our null hypothesis that there is no change in energy consumption in US during pandemic as we can see that there is steep drop in energy consumption during year 2020-2021 as compared to previous years. As we can see in 2019 the drop between Jan-April was around 18% whereas in 2020 the drop in energy consumption was around 27% for the same period. The percentage drop between this period from 2019 to 2020 is 9%. Similarly comparing energy consumption in year 2018 and 2019 for month of Dec-Jan which was greater than 9.5 quadrillion Btu and it fell to below 9 quadrillion Btu during Dec-Jan 2020 and 2021. Here we can clearly see that there is drop of about 7.5% since the pandemic has come into existence. Though the overall energy consumption pattern recovered(tracked back the same pattern as in 2017-2019) after April 2020  but still there is significant change in amount of energy consumption. Hence, we reject our null hypothesis.
 
 2.	There is no significant change in crude oil prices during pandemic
  
