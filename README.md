@@ -6,6 +6,7 @@
 1.	COVID-19 Data Repository by the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University- https://github.com/CSSEGISandData/COVID-19/tree/master/who_covid_19_situation_reports
 3.	International - U.S. Energy Information Administration-https://www.eia.gov/international/data/world
 4.	OPEC - https://asb.opec.org/data/ASB_Data.php
+5. Statistical Review of World Energy – all data, 1965-2020 - 	https://www.bp.com/en/global/corporate/energy-economics/statistical-review-of-world-energy.html
 ### Hypothesis:
 1.	There is no change in energy consumption in US during pandemic
 2.	There is no significant change in crude oil prices during pandemic
