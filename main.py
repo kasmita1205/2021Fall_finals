@@ -130,14 +130,14 @@ def per_person_electricity_consumption(population: pd.DataFrame, total_electrici
     plt.plot(population_world['Year'], population_world['Perperson Electricity Consumption World'])
     plt.xlabel("Year\n\n")
     plt.ylabel("Consumption(in Million kWh)")
-    plt.title("Per person Energy Consumption in World")
+    plt.title("Per person Electricity Consumption in World")
     plt.xticks(rotation=90)
 
     plt.subplot(2, 2, 3)
     plt.plot(population_world['Year'], population_world['Perperson Electricity Consumption US'], color='r')
     plt.xlabel("Year")
     plt.ylabel("Consumption(in Million kWh)")
-    plt.title("Per person Energy Consumption in US")
+    plt.title("Per person Electricity Consumption in US")
     plt.xticks(rotation=90)
     plt.show()
 
