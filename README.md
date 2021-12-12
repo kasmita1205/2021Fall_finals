@@ -33,12 +33,11 @@ Based on the above graph we reject our null hypothesis that there is no change i
 
 We reject our null hypothesis that there is no significant change in prices of crude oil during pandemic as from above graph we can see that there is remarkable change in prices of crude oil during the pandemic i.e year 2020 as compared to 2019.
 
-3.	The increase in usage of renewable energy in recent years doesn’t affect usage of non renewable energy.
-As from the plot we can see that for the past two decades the consumption of renewable energy is rising constantly but till now it has not created any notable impact on usage of non renewable energy. Hence, the null hypothesis is correct.
+3.The increase in usage of renewable energy in recent years doesn’t affect usage of non renewable energy. As from the plot we can see that for the past two decades the consumption of renewable energy is rising constantly but till now it has not created any notable impact on usage of non renewable energy. Hence, the null hypothesis is correct. Although from the second plot we can see that from 1980 to 1990 the primary energy consumption and fossil fuel consumption followed close margins which gradually increased over time up to year 2020. Also, we can see a significant gap between two in past decade. Comparing first plot which shows increase in consumption of renewable energy to second, we can say that usage of renewable energy has not affected non renewable energy but it suggests that the gap in second plot amounts to renewable energy and hence it can be interpreted that the growth in energy demand is fulfilled with renewable energy resources.
 
 ![Picture2](https://user-images.githubusercontent.com/63721840/144547477-2ba2911e-7945-40f6-a91e-46dd29d0bcfd.png)
 
-![Screenshot 2021-12-12 041047](https://user-images.githubusercontent.com/63721840/145708410-97b7ec1c-8721-47ef-99d7-35ce2600ebee.png)
+![Screenshot 2021-12-12 041617](https://user-images.githubusercontent.com/63721840/145708522-5d7f2208-a655-46df-918a-a160bb1bd4fe.png)
 
 
 4.With automation and increase in usage of technology, accessibility to electronic equipment and gadgets, electrical vehicles there should be increase in per person electricity consumption around the globe. Over the years it is observed that per capita electricity consumption has increased around the globe but interestingly the negative trend is observed in case of US after year 2007. In US the per person electricity consumption was somewhere around 12.9 Million kWh which decreased to 11.6 Million kWh in 2020. There is clearly a drop of 10%. On contrary, there is around 19% growth in per person electricity consumption around the globe from 2007 to 2020. Hence, the hypothesis is true while considering global energy consumption but it is not true in case of US. 
