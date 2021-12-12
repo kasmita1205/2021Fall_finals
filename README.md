@@ -41,8 +41,7 @@ As from the plot we can see that for the past two decades the consumption of ren
 ![Picture2](https://user-images.githubusercontent.com/63721840/144547477-2ba2911e-7945-40f6-a91e-46dd29d0bcfd.png)
 
 
-4.	With development there in increase in per person electricity consumption in both US and around the globe.
-Over the years it is observed that per capita energy consumption has increased around the globe but interestingly the negative trend is observed in case of US after year 2008. Hence, the hypothesis is true when considering global energy consumption but it is not true in case of every country.
+4.With automation and increase in usage of technology, accessibility to electronic equipment and gadgets, electrical vehicles there should be increase in per person electricity consumption around the globe. Over the years it is observed that per capita electricity consumption has increased around the globe but interestingly the negative trend is observed in case of US after year 2007. In US the per person electricity consumption was somewhere around 12.9 Million kWh which decreased to 11.6 Million kWh in 2020. There is clearly a drop of 10%. On contrary, there is around 19% growth in per person electricity consumption around the globe from 2007 to 2020. Hence, the hypothesis is true while considering global energy consumption but it is not true in case of US. 
 
 ![Screenshot 2021-12-12 033613](https://user-images.githubusercontent.com/63721840/145707419-075050be-57d4-4e07-8f30-98f6129d4630.png)
 
