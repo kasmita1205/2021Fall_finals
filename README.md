@@ -6,6 +6,7 @@
 1.	COVID-19 Data Repository by the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University- https://github.com/CSSEGISandData/COVID-19/tree/master/who_covid_19_situation_reports
 3.	International - U.S. Energy Information Administration-https://www.eia.gov/international/data/world
 4.	OPEC - https://asb.opec.org/data/ASB_Data.php
+5. Statistical Review of World Energy – all data, 1965-2020 - 	https://www.bp.com/en/global/corporate/energy-economics/statistical-review-of-world-energy.html
 ### Hypothesis:
 1.	There is no change in energy consumption in US during pandemic
 2.	There is no significant change in crude oil prices during pandemic
@@ -18,7 +19,7 @@
 - Moreover it can also seen that major producer and consumer of nuclear energy are North America and Europe and talking about the coal consumption and production then western regions such as North America and Europe have reduced successfully but one the other hand rate of coal consumption and production has increased tremendously in Asia Pacific after year 2000. 
 - Talking about natural gas and oil production and consumption Middle east, North America and Commonwealth of Independent States (CIS) are major producers of oil and natural gas and Asia Pacific and North America are the major consumers of oil and natural gas.
 - Although Asia Pacific overtook other regions in production and consumption of renewable energy but the same region is the major contributor in CO2 emissions. 
- The COVID-19 impact: COVID-19 had negatively affected whole energy sector. Growth rate (in year 2020) of production and consumption of almost every is in negative except the --- Renewable energy. A decent amount of growth rate i.e., 12 % is observed in production of all over renewable sector moreover CIS region has shown impressive growth rate of 112%. Oil consumption and production seems to be most affected by the COVID-19 with -10% and -7% respectively.
+ The COVID-19 impact: COVID-19 had negatively affected whole energy sector. Growth rate (in year 2020) of production and consumption of almost every is in negative except the  Renewable energy. A decent amount of growth rate i.e., 12 % is observed in production of all over renewable sector moreover CIS region has shown impressive growth rate of 112%. Oil consumption and production seems to be most affected by the COVID-19 with -10% and -7% respectively.
 
 ### Results:
 1.	There is no change in energy consumption in US during pandemic 
