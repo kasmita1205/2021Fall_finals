@@ -33,17 +33,23 @@ Based on the above graph we reject our null hypothesis that there is no change i
 
 We reject our null hypothesis that there is no significant change in prices of crude oil during pandemic as from above graph we can see that there is remarkable change in prices of crude oil during the pandemic i.e year 2020 as compared to 2019.
 
-3.The increase in usage of renewable energy in recent years doesn’t affect usage of non renewable energy in US. As from the plot we can see that for the past two decades the consumption of renewable energy in US is rising constantly but till now it has not created any notable impact on usage of non renewable energy. Hence, the null hypothesis is correct. Although from the second plot we can see that from 1980 to 1990 the primary energy consumption and fossil fuel consumption followed close margins which gradually increased over time up to year 2020. Also, we can see a significant gap between two in past decade. Comparing first plot which shows increase in consumption of renewable energy to second, we can say that usage of renewable energy has not affected non renewable energy but it suggests that the gap in second plot amounts to renewable energy and hence it can be interpreted that the growth in energy demand is met with renewable energy resources.
+3.The increase in usage of renewable energy in recent years doesn’t affect usage of non renewable energy in US. 
+As from the plot we can see that for the past two decades the consumption of renewable energy in US is rising constantly but till now it has not created any notable impact on usage of non renewable energy. Hence, the null hypothesis is correct. Although from the second plot we can see that from 1980 to 1990 the primary energy consumption and fossil fuel consumption followed close margins which gradually increased over time up to year 2020. Also, we can see a significant gap between two in past decade. Comparing first plot which shows increase in consumption of renewable energy to second, we can say that usage of renewable energy has not affected non renewable energy but it suggests that the gap in second plot amounts to renewable energy and hence it can be interpreted that the growth in energy demand is met with renewable energy resources.
 
 ![Picture2](https://user-images.githubusercontent.com/63721840/144547477-2ba2911e-7945-40f6-a91e-46dd29d0bcfd.png)
 
 ![Screenshot 2021-12-12 041617](https://user-images.githubusercontent.com/63721840/145708522-5d7f2208-a655-46df-918a-a160bb1bd4fe.png)
 
 
-4.With automation and increase in usage of technology, accessibility to electronic equipment and gadgets, electrical vehicles there should be increase in per person electricity consumption around the globe. Over the years it is observed that per capita electricity consumption has increased around the globe but interestingly the negative trend is observed in case of US after year 2007. In US the per person electricity consumption was somewhere around 12.9 Million kWh which decreased to 11.6 Million kWh in 2020. There is clearly a drop of 10%. On contrary, there is around 19% growth in per person electricity consumption around the globe from 2007 to 2020. Hence, the hypothesis is true while considering global energy consumption but it is not true in case of US. 
+4.With automation and increase in usage of technology, accessibility to electronic equipment and gadgets, electrical vehicles there should be increase in per person electricity consumption around the globe. 
+Over the years it is observed that per capita electricity consumption has increased around the globe but interestingly the negative trend is observed in case of US after year 2007. In US the per person electricity consumption was somewhere around 12.9 Million kWh which decreased to 11.6 Million kWh in 2020. There is clearly a drop of 10%. On contrary, there is around 19% growth in per person electricity consumption around the globe from 2007 to 2020. Hence, the hypothesis is true while considering global energy consumption but it is not true in case of US. 
 
 ![Screenshot 2021-12-12 033613](https://user-images.githubusercontent.com/63721840/145707419-075050be-57d4-4e07-8f30-98f6129d4630.png)
 
+5. With promotion of renewable energy in recent years, there is drop in CO2 emissions globally.
+Looking at the below two graphs and plots for percentage change we see there is no drop in CO2 emissions with respect to increase in renewable energy. Infact the second plot shows increase in renewable energy consumption has no effect to overall CO2 emissions which strengthens our analysis in Hypothesis 3 that renewable energy has no effect over usage of non-renwable energy and renewable energy is being used to fulfill new demand-supply gaps.
+
+![Screenshot 2021-12-12 045823](https://user-images.githubusercontent.com/63721840/145709702-147dc095-8cb7-4a8d-920c-fddf4cca776c.png)
 
 
 
